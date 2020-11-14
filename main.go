@@ -13,7 +13,7 @@ type pt struct {
 }
 
 func main() {
-	s := "Ajay Mahajan"
+	s := "Ajay Mahajan 2 and see "
 	defer fmt.Println("hello world")
 	fmt.Println(s, addn(4, 5))
 	fmt.Println(time.Now())
