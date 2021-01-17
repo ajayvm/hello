@@ -5,8 +5,7 @@ import (
 	"math"
 	"runtime"
 	"time"
-
-	"github.com/ajayvm/greetings"
+	// 	"github.com/ajayvm/greetings"
 )
 
 type pt struct {
@@ -32,8 +31,6 @@ func main() {
 		{{1, 2}, {3, 4}}, {{61, 26}, {35, 47}},
 	}
 	fmt.Println(ptArr)
-	message := greetings.Hello("Gladys")
-	fmt.Println(message)
 }
 
 func sqrt(x float64) float64 {
