@@ -17,7 +17,7 @@ import (
 // pick from mandelbrot at https://github.com/davecheney/high-performance-go-workshop/tree/master/examples/
 // for checking trace use go tool trace trace.out
 // for checking memory and cpu profile,--> go tool pprof -http :8080 cpu.pprof (or mem.pprof)
-func main() {
+func mainMandelBrot() {
 	// defer profile.Start(profile.MemProfile, profile.MemProfileRate(1), profile.ProfilePath(".")).Stop()
 	// defer profile.Start(profile.CPUProfile, profile.ProfilePath(".")).Stop()
 	defer profile.Start(profile.TraceProfile, profile.ProfilePath(".")).Stop()

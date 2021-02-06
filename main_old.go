@@ -13,7 +13,7 @@ type pt struct {
 	y int
 }
 
-func mainLater() {
+func origMain() {
 	s := "Ajay Mahajan 2 and see the world "
 	defer fmt.Println("hello world")
 	fmt.Println(s, addn(4, 5))
