@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/jackc/pgx"
 )
@@ -20,12 +21,20 @@ var purchase struct {
 var conn *pgx.Conn
 
 func main() {
+	// defer profile.Start(profile.CPUProfile, profile.ProfilePath(".")).Stop()
+	// defer profile.Start(profile.MemProfile, profile.MemProfileRate(1), profile.ProfilePath(".")).Stop()
+
+	start := time.Now()
+
 	var err error
 	conn, err = pgx.Connect(context.Background(), "postgresql://postgres:xmbd2311@localhost")
+
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connection to database: %v\n", err)
 		os.Exit(1)
 	}
+	fmt.Println(" conn time ", time.Since(start))
+	connTime := time.Now()
 
 	if len(os.Args) == 1 {
 		printHelp()
@@ -76,6 +85,8 @@ func main() {
 		printHelp()
 		os.Exit(1)
 	}
+	fmt.Println(" completion time ", time.Since(connTime))
+
 }
 
 func listTasks() error {
@@ -95,9 +106,7 @@ func listTasks() error {
 }
 
 func addTask(description string) error {
-	n, err := conn.Exec(context.Background(), "insert into tasks(description) values($1)", description)
-
-	fmt.Printf("%T, %v", n, n)
+	_, err := conn.Exec(context.Background(), "insert into tasks(description) values($1)", description)
 	return err
 }
 
