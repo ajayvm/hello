@@ -27,7 +27,8 @@ func main() {
 	start := time.Now()
 
 	var err error
-	conn, err = pgx.Connect(context.Background(), "postgresql://postgres:xmbd2311@localhost")
+	// conn, err = pgx.Connect(context.Background(), "postgresql://postgres:xmbd2311@localhost")
+	conn, err = pgx.Connect(context.Background(), "postgres://root:admin@127.0.0.1:41801/movr?sslmode=require")
 
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connection to database: %v\n", err)
@@ -59,10 +60,10 @@ func main() {
 	case "update":
 		n, err := strconv.ParseInt(os.Args[2], 10, 32)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Unable convert task_num into int32: %v\n", err)
+			fmt.Fprintf(os.Stderr, "Unable convert task_num into int: %v\n", err)
 			os.Exit(1)
 		}
-		err = updateTask(int32(n), os.Args[3])
+		err = updateTask(int(n), os.Args[3])
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Unable to update task: %v\n", err)
 			os.Exit(1)
@@ -71,10 +72,10 @@ func main() {
 	case "remove":
 		n, err := strconv.ParseInt(os.Args[2], 10, 32)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Unable convert task_num into int32: %v\n", err)
+			fmt.Fprintf(os.Stderr, "Unable convert task_num into int: %v\n", err)
 			os.Exit(1)
 		}
-		err = removeTask(int32(n))
+		err = removeTask(int(n))
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Unable to remove task: %v\n", err)
 			os.Exit(1)
@@ -93,7 +94,7 @@ func listTasks() error {
 	rows, _ := conn.Query(context.Background(), "select * from tasks")
 
 	for rows.Next() {
-		var id int32
+		var id int
 		var description string
 		err := rows.Scan(&id, &description)
 		if err != nil {
@@ -110,12 +111,12 @@ func addTask(description string) error {
 	return err
 }
 
-func updateTask(itemNum int32, description string) error {
+func updateTask(itemNum int, description string) error {
 	_, err := conn.Exec(context.Background(), "update tasks set description=$1 where id=$2", description, itemNum)
 	return err
 }
 
-func removeTask(itemNum int32) error {
+func removeTask(itemNum int) error {
 	_, err := conn.Exec(context.Background(), "delete from tasks where id=$1", itemNum)
 	return err
 }
