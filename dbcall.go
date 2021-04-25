@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/jackc/pgx"
+	"github.com/jackc/pgx/v4"
 )
 
 var purchase struct {
@@ -27,8 +27,9 @@ func main() {
 	start := time.Now()
 
 	var err error
-	// conn, err = pgx.Connect(context.Background(), "postgresql://postgres:xmbd2311@localhost")
-	conn, err = pgx.Connect(context.Background(), "postgres://root:admin@127.0.0.1:41801/movr?sslmode=require")
+	// The first is the call to postgres the second to a aerospike
+	conn, err = pgx.Connect(context.Background(), "postgresql://postgres:xmbd2311@localhost")
+	// conn, err = pgx.Connect(context.Background(), "postgres://root:admin@127.0.0.1:41801/movr?sslmode=require")
 
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connection to database: %v\n", err)
