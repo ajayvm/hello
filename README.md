@@ -1,7 +1,14 @@
 # hello
 Readme file of the project. 
 
-the main.go is the mandelbrot program with parallel runs of the go routines 
-the word count series has multiple things with usage of buffered io and memory allocation 
-the main_old are public static void applications 
+Sample go runs 
+Main program has the main method and calls the other methods as necessary. 
+Hence the need to have go run command include all go files 
+
+go run main.go mandel.go dbcall.go wc_series.go list
+
+else gives error MainDb not found. 
+
+the other option is to run go build, which will include all files in the executable. 
+
 

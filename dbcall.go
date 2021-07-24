@@ -10,17 +10,9 @@ import (
 	"github.com/jackc/pgx/v4"
 )
 
-var purchase struct {
-	cardNo  string
-	expDate string
-	amt     int
-	mcode   string
-	curr    string
-}
-
 var conn *pgx.Conn
 
-func main() {
+func MainDb() {
 	// defer profile.Start(profile.CPUProfile, profile.ProfilePath(".")).Stop()
 	// defer profile.Start(profile.MemProfile, profile.MemProfileRate(1), profile.ProfilePath(".")).Stop()
 

@@ -21,7 +21,7 @@ func readbyte(r io.Reader) (rune, error) {
 // see the profiler results using
 // go tool pprof -http :8080 cpu.pprof (or mem.pprof)
 //
-func mainwc() {
+func Mainwc() {
 	// defer profile.Start(profile.MemProfile, profile.MemProfileRate(1), profile.ProfilePath(".")).Stop()
 	// defer profile.Start(profile.CPUProfile, profile.ProfilePath(".")).Stop()
 
